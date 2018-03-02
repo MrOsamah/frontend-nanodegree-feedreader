@@ -3,7 +3,7 @@ This is the last project of Udacity's Front-End Developer nanodegree. In this pr
 
 
 ## How to launch
-Simply clone this repository to your local client then double click to index.html to launch the app. You can also ren a [local server](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server) for a bonus.
+Simply clone/download this repository to your local client then double click to index.html to launch the app. You can also run a [local server](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server) for a bonus.
 
 ## Tasks
 1. Write a test that loops through each feed in the `allFeeds` object and ensures it has a URL defined and that the URL is not empty.
