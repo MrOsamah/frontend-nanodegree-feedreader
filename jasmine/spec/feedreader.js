@@ -27,46 +27,116 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* This is our second test - a test to loop through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
 
+         it("all are having urls and they are not empty", function(){
+           for (var i = 0; i < allFeeds.length; i++) {
+             expect(allFeeds[i].url).toBeDefined();
+             expect(allFeeds[i].url).not.toBe("");
+           }
+         });
 
-        /* TODO: Write a test that loops through each feed
+
+        /* The third test and final test in this suite- a test to loop through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+
+         it("all are having names defined and they are not empty", function(){
+           for (var i = 0; i < allFeeds.length; i++) {
+             expect(allFeeds[i].name).toBeDefined();
+             expect(allFeeds[i].name).not.toBe("");
+           }
+         });
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* This is our second test suite, this suite related to the menu */
+    describe("The menu", function(){
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+      // body tag selector
+      var bodyElement = $("body");
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+      /* Our first test in this suite - to ensure the menu element is
+       * hidden by default. The menu is hidden using the "menu-hidden"
+       * class in the "body" tag, the test ensures that the body tag
+       * has class called menu-hidden
+       */
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+      it("is hidden by default", function(){
+        expect(bodyElement.hasClass("menu-hidden")).toBe(true);
+      });
 
-        /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
+       /* This test is to ensure that the menu changes
+        * visibility when the menu icon is clicked. We do
+        * this by trigger the click event then check the menu-hidden class
+        * then click again and check again
+        */
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+        it("has an icon when clicked it toggles the visibility", function(){
+          var menuIcon = $(".menu-icon-link");
+          menuIcon.trigger("click");
+          expect(bodyElement.hasClass("menu-hidden")).toBe(false);
+          menuIcon.trigger("click");
+          expect(bodyElement.hasClass("menu-hidden")).toBe(true);
+        });
 
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+    });
+
+    /* A new test suite named "Initial Entries" */
+
+    describe("Initial Entries", function(){
+
+      /* This test to ensure that when the loadFeed
+       * function is called and completes its work, there is at least
+       * a single .entry element within the .feed container.
+       * In this test we search feed container for ".entry".
+       */
+
+       // passing done https://discussions.udacity.com/t/async-tests-why-the-second-done-call/40751
+       beforeEach(function(done){
+         loadFeed(0, done);
+       });
+
+       it("are not empty when they are loaded", function(done){
+         var feedCont = $(".feed");
+         expect(feedCont.find(".entry").length).not.toBe(0);
+         done();
+       });
+
+    });
+
+    /* The last test suite , with the name "New Feed Selection" */
+
+    describe("New Feed Selection" , function(){
+
+      /* The last test - a test ensures that when a new feed is loaded
+       * by the loadFeed function that the content actually changes.
+       * In this test we call loadFeed two times and each time we store
+       * the entry selector in a variable, and we expect the two variables
+       * not to be equal, that's mean there is a new feed indeed
+       */
+
+       var entry1,entry2;
+
+       beforeEach(function(done){
+         loadFeed(0, function(){
+           entry1 = $(".entry").text();
+           done();
+         });
+         loadFeed(1, function(){
+           entry2 = $(".entry").text();
+           done();
+         });
+       });
+
+       it("is added and the content actually changes", function(done){
+         expect(entry1).not.toBe(entry2);
+         done();
+       });
+
+    });
 }());
