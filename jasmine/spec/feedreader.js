@@ -32,10 +32,10 @@ $(function() {
          */
 
         it("all are having urls and they are not empty", function() {
-            for (var i = 0; i < allFeeds.length; i++) {
-                expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url).not.toBe("");
-            }
+
+            allFeeds.forEach(function(feed){
+                expect(feed.url).toBeDefined();
+                expect(feed.url).not.toBe("");
         });
 
 
@@ -45,10 +45,9 @@ $(function() {
          */
 
         it("all are having names defined and they are not empty", function() {
-            for (var i = 0; i < allFeeds.length; i++) {
-                expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name).not.toBe("");
-            }
+          allFeeds.forEach(function(feed){
+              expect(feed.name).toBeDefined();
+              expect(feed.name).not.toBe("");
         });
     });
 
