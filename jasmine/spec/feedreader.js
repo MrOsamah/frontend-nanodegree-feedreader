@@ -124,11 +124,10 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(0, function() {
                 entry1 = $(".entry").text();
-                done();
-            });
-            loadFeed(1, function() {
-                entry2 = $(".entry").text();
-                done();
+                loadFeed(1, function() {
+                    entry2 = $(".entry").text();
+                    done();
+                });
             });
         });
 
